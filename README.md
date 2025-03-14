@@ -6,7 +6,7 @@
 Nombre completo | Código
 Estudiante1 | 123456
 Estudiante2 | 123457
-Estudiante3 | 123458
+Alejandro Mesa | 202060102
 
 ## Descripción del taller
 
