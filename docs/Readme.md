@@ -1,14 +1,20 @@
-# Documentación del taller
+# 📄 Documentación del Taller 1: Modelamiento de CSP
 
-## Ejemplo subtitulo
+📅 **Fecha de entrega:** 17 de marzo de 2025  
+👨‍💻 **Integrantes:** [Nombre1], [Nombre2], [Nombre3]
 
-### Ejemplo subtitulo nivel 2
+---
 
-## Ejemplo de tabla
+## 📌 Contenido de la Carpeta `docs/`
 
-Columna 1 | Columna 2 | Columna 3
-Ejemplo 1 | Ejemplo 2 | Ejemplo 3
+Esta carpeta contiene la documentación detallada del **Taller 1: Modelamiento de CSP**, donde se modelan los problemas de **Sudoku** y **Kakuro** en **MiniZinc**.
 
-## Documentación
+📂 **Archivos dentro de `docs/`**
 
-[Github markdown](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+```bash
+📂 docs/
+│── 📄 Readme.md       # Explicación del contenido de la documentación
+│── 📄 Sudoku.md       # Informe sobre el modelado CSP del Sudoku
+│── 📄 Kakuro.md       # Informe sobre el modelado CSP del Kakuro
+│── 📂 imagenes/       # Capturas de ejecución de los modelos
+```
