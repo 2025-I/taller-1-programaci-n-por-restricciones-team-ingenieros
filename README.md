@@ -5,7 +5,7 @@
 
 Nombre completo | Código
 Estudiante1 | 123456
-Estudiante2 | 123457
+Joann Esteban Bedoya | 202059906
 Alejandro Mesa | 202060102
 
 ## Descripción del taller

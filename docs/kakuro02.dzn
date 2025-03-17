@@ -1,0 +1,28 @@
+% 4x4 Kakuro
+
+n = 4;
+
+% 1 = Celdas validas (numeros)
+% 0 = muro o pista
+validCell = array2d(1..4, 1..4, [
+  0, 0, 0, 0,
+  0, 1, 1, 1,
+  0, 1, 1, 1,
+  0, 1, 1, 1
+]);
+
+% Suma horizontal pistas
+hsum = array2d(1..4, 1..4, [
+  0, 15, 9, 20,
+  0, 0, 0, 0,
+  0, 0, 0, 0,
+  0, 0, 0, 0
+]);
+
+% Suma vertical pistas
+vsum = array2d(1..4, 1..4, [
+  0, 15, 9, 18,
+  0, 0, 0, 0,
+  0, 0, 0, 0,
+  0, 0, 0, 1
+]);
