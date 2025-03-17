@@ -44,12 +44,12 @@ Se implementó el modelo CSP en `sudoku.mzn`, considerando las restricciones y r
 
 ### **3.1 Archivos del Proyecto**
 
-| **Archivo**                           | **Descripción**                   |
-| ------------------------------------- | --------------------------------- |
-| [`sudoku.mzn`](../docs/Sudoku.md)     | Documentacion para Sudoku.        |
-| [`sudoku.dzn`](../docs/sudoku.mzn)    | La estrategia `alldifferent`.     |
-| [`sudoku2.dzn`](../docs/sudoku2.dzn)  | La estrategia `first_fail`.       |
-| [`sudoku3.dzn`](../docs//sudoku3.dzn) | La estrategia `most_constrained`. |
+| **Archivo**                          | **Descripción**                   |
+| ------------------------------------ | --------------------------------- |
+| [`sudoku.mzn`](../docs/Sudoku.md)    | Documentacion para Sudoku.        |
+| [`sudoku.dzn`](../docs/sudoku.mzn)   | La estrategia `alldifferent`.     |
+| [`sudoku2.dzn`](../docs/sudoku2.dzn) | La estrategia `first_fail`.       |
+| [`sudoku3.dzn`](../docs/sudoku3.dzn) | La estrategia `most_constrained`. |
 
 ---
 
@@ -138,6 +138,24 @@ Esto ayuda a evitar soluciones repetitivas y mejorar la exploración del espacio
 - La estrategia **`first_fail`** mostró una mejora en tiempos de ejecución al priorizar las variables con menos opciones.
 - La estrategia **`most_constrained`** puede ser más efectiva en algunos casos, pero introduce aleatoriedad en el tiempo de ejecución.
 - El modelo base **es el menos eficiente**, adecuado solo para instancias pequeñas.
+
+### **5.1 Prueba Adicional 1**
+
+📂 **Capturas de ejecución:**
+
+- ![Prueba Adicional 1 - Resultado 1](./ImagenesDocumentacion/Sudoku03prueba2.png)
+- ![Prueba Adicional 1 - Resultado 2](./ImagenesDocumentacion/Sudoku03prueba2ms.png)
+
+---
+
+### **5.2 Prueba Adicional 2**
+
+📂 **Capturas de ejecución:**
+
+- ![Prueba Adicional 2 - Resultado 1](./ImagenesDocumentacion/Sudoku03prueba3.png)
+- ![Prueba Adicional 2 - Resultado 2](./ImagenesDocumentacion/Sudoku03prueba3ms.png)
+
+---
 
 ---
 
