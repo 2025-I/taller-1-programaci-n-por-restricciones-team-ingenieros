@@ -67,7 +67,7 @@ Se realizaron pruebas con **tres instancias de Kakuro**, variando el tamaño del
 
 🔹 **Tiempo de ejecución:**
 ![Velocidad 3x3](./ImagenesDocumentacion/kakuro01md.png)  
-🔹 **Mejor estrategia aplicada:** _XX_  
+🔹 **Estrategia aplicada:** _DFS_  
 📂 **Captura de ejecución:**  
 ![Prueba 3x3](./ImagenesDocumentacion/kakuro01.png)
 
@@ -78,7 +78,7 @@ Se realizaron pruebas con **tres instancias de Kakuro**, variando el tamaño del
 🔹 **Tiempo de ejecución:**
 ![Velocidad 4x4](./ImagenesDocumentacion/kakuro02md.png)
 
-🔹 **Mejor estrategia aplicada:** _XX_  
+🔹 **Estrategia aplicada:** _First Fail_  
 📂 **Captura de ejecución:**  
 ![Prueba 4x4](./ImagenesDocumentacion/kakur02.png)
 
@@ -88,7 +88,7 @@ Se realizaron pruebas con **tres instancias de Kakuro**, variando el tamaño del
 
 🔹 **Tiempo de ejecución:**
 ![Velocidad 3x3](./ImagenesDocumentacion/kakuro03md.png)  
-🔹 **Mejor estrategia aplicada:** _XX_  
+🔹 **Estrategia aplicada:** _Branch und Bound_  
 📂 **Captura de ejecución:**  
 ![Prueba 5x5](./ImagenesDocumentacion/kakuro03.png)
 
@@ -98,9 +98,9 @@ Se realizaron pruebas con **tres instancias de Kakuro**, variando el tamaño del
 
 | **Estrategia**       | **Tiempo de ejecución (ms)** |
 | -------------------- | ---------------------------- |
-| **DFS**              | XX ms                        |
-| **First Fail**       | XX ms                        |
-| **Branch and Bound** | XX ms                        |
+| **DFS**              | 286 ms                       |
+| **First Fail**       | 270 ms                       |
+| **Branch and Bound** | 506 ms                       |
 
 📌 **Conclusión:**
 
@@ -138,10 +138,42 @@ Cada una de estas pruebas contiene **dos imágenes** que muestran los resultados
 
 📂 **Capturas de ejecución:**
 
-- ![Prueba Adicional 3 - Resultado 1](../imagenes/kakuro_prueba_adicional3_1.png)
-- ![Prueba Adicional 3 - Resultado 2](../imagenes/kakuro_prueba_adicional3_2.png)
+- ![Prueba Adicional 3 - Resultado 1](./ImagenesDocumentacion/kakuro02prueba3.png)
+- ![Prueba Adicional 3 - Resultado 2](./ImagenesDocumentacion/kakuro02prueba3ms.png)
 
 ---
+
+### **6.4 Notacion amtematica**
+
+Definición del Problema Kakuro
+Dado:
+
+$n \in \mathbb{Z}^+$: Tamaño de la cuadrícula $n \times n$
+$V = {v_{i,j} \mid i,j \in {1,2,...,n}}$ donde $v_{i,j} \in {0,1}$: Matriz de celdas válidas
+$H = {h_{i,j} \mid i,j \in {1,2,...,n}}$ donde $h_{i,j} \in {0,1,...,45}$: Matriz de pistas horizontales
+$V' = {v'{i,j} \mid i,j \in {1,2,...,n}}$ donde $v'{i,j} \in {0,1,...,45}$: Matriz de pistas verticales
+
+Encontrar:
+
+$G = {g_{i,j} \mid i,j \in {1,2,...,n}}$ donde $g_{i,j} \in {0,1,...,9}$: La cuadrícula de solución
+
+Restricciones
+
+1. Restricciones de validez de celdas
+   ∀i,j∈{1,...,n}:vi,j=0⇒gi,j=0\forall i,j \in \{1,...,n\}: v*{i,j} = 0 \Rightarrow g*{i,j} = 0∀i,j∈{1,...,n}:vi,j​=0⇒gi,j​=0
+   ∀i,j∈{1,...,n}:vi,j=1⇒gi,j∈{1,...,9}\forall i,j \in \{1,...,n\}: v*{i,j} = 1 \Rightarrow g*{i,j} \in \{1,...,9\}∀i,j∈{1,...,n}:vi,j​=1⇒gi,j​∈{1,...,9}
+2. Restricciones de suma horizontal
+   Para cada $i,j$ donde $h_{i,j} > 0$, sea $C^h_{i,j} = {k \mid k \in {j+1,...,n} \wedge v_{i,k} = 1}$ el conjunto de celdas válidas a la derecha:
+   ∑k∈Ci,jhgi,k=hi,j\sum*{k \in C^h*{i,j}} g*{i,k} = h*{i,j}∑k∈Ci,jh​​gi,k​=hi,j​
+3. Restricciones de unicidad horizontal
+   Para cada $i,j$ donde $h_{i,j} > 0$:
+   ∀k,l∈Ci,jh,k≠l:gi,k≠gi,l\forall k,l \in C^h*{i,j}, k \neq l: g*{i,k} \neq g\_{i,l}∀k,l∈Ci,jh​,k=l:gi,k​=gi,l​
+4. Restricciones de suma vertical
+   Para cada $i,j$ donde $v'{i,j} > 0$, sea $C^v{i,j} = {k \mid k \in {i+1,...,n} \wedge v_{k,j} = 1}$ el conjunto de celdas válidas hacia abajo:
+   ∑k∈Ci,jvgk,j=vi,j′\sum*{k \in C^v*{i,j}} g*{k,j} = v'*{i,j}∑k∈Ci,jv​​gk,j​=vi,j′​
+5. Restricciones de unicidad vertical
+   Para cada $i,j$ donde $v'_{i,j} > 0$:
+   ∀k,l∈Ci,jv,k≠l:gk,j≠gl,j\forall k,l \in C^v*{i,j}, k \neq l: g*{k,j} \neq g\_{l,j}∀k,l∈Ci,jv​,k=l:gk,j​=gl,j​
 
 📌 **Conclusión:**  
 Los resultados obtenidos en estas pruebas adicionales confirman que la estrategia **`first_fail`** es eficiente en la mayoría de los casos, manteniendo tiempos de ejecución bajos y estabilidad en la resolución del Kakuro. Sin embargo, algunos casos requieren ajustes específicos en el modelo CSP para mejorar la optimización.
