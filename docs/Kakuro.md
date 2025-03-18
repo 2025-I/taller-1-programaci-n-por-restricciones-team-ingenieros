@@ -145,35 +145,49 @@ Cada una de estas pruebas contiene **dos imágenes** que muestran los resultados
 
 ### **6.4 Notacion amtematica**
 
-Definición del Problema Kakuro
-Dado:
+## Definiciones
 
-$n \in \mathbb{Z}^+$: Tamaño de la cuadrícula $n \times n$
-$V = {v_{i,j} \mid i,j \in {1,2,...,n}}$ donde $v_{i,j} \in {0,1}$: Matriz de celdas válidas
-$H = {h_{i,j} \mid i,j \in {1,2,...,n}}$ donde $h_{i,j} \in {0,1,...,45}$: Matriz de pistas horizontales
-$V' = {v'{i,j} \mid i,j \in {1,2,...,n}}$ donde $v'{i,j} \in {0,1,...,45}$: Matriz de pistas verticales
+Sea \( n \) el tamaño de la cuadrícula \( n \times n \). Definimos las siguientes matrices:
 
-Encontrar:
+- \( \text{validCell}\_{i,j} \in \{0,1\} \) indica si la celda \( (i,j) \) es válida para contener un número (1) o si es una pared (0).
+- \( \text{hsum}{i,j} \in \{0, \dots, 45\} \) representa la suma horizontal impuesta por la celda \( (i,j) \) si \( \text{hsum}{i,j} > 0 \).
+- \( \text{vsum}{i,j} \in \{0, \dots, 45\} \) representa la suma vertical impuesta por la celda \( (i,j) \) si \( \text{vsum}{i,j} > 0 \).
+- \( \text{grid}\_{i,j} \in \{0, \dots, 9\} \) representa el valor de la celda en la solución (0 indica una pared).
 
-$G = {g_{i,j} \mid i,j \in {1,2,...,n}}$ donde $g_{i,j} \in {0,1,...,9}$: La cuadrícula de solución
+## Restricciones
 
-Restricciones
+### 1. Restricciones sobre las celdas
 
-1. Restricciones de validez de celdas
-   ∀i,j∈{1,...,n}:vi,j=0⇒gi,j=0\forall i,j \in \{1,...,n\}: v*{i,j} = 0 \Rightarrow g*{i,j} = 0∀i,j∈{1,...,n}:vi,j​=0⇒gi,j​=0
-   ∀i,j∈{1,...,n}:vi,j=1⇒gi,j∈{1,...,9}\forall i,j \in \{1,...,n\}: v*{i,j} = 1 \Rightarrow g*{i,j} \in \{1,...,9\}∀i,j∈{1,...,n}:vi,j​=1⇒gi,j​∈{1,...,9}
-2. Restricciones de suma horizontal
-   Para cada $i,j$ donde $h_{i,j} > 0$, sea $C^h_{i,j} = {k \mid k \in {j+1,...,n} \wedge v_{i,k} = 1}$ el conjunto de celdas válidas a la derecha:
-   ∑k∈Ci,jhgi,k=hi,j\sum*{k \in C^h*{i,j}} g*{i,k} = h*{i,j}∑k∈Ci,jh​​gi,k​=hi,j​
-3. Restricciones de unicidad horizontal
-   Para cada $i,j$ donde $h_{i,j} > 0$:
-   ∀k,l∈Ci,jh,k≠l:gi,k≠gi,l\forall k,l \in C^h*{i,j}, k \neq l: g*{i,k} \neq g\_{i,l}∀k,l∈Ci,jh​,k=l:gi,k​=gi,l​
-4. Restricciones de suma vertical
-   Para cada $i,j$ donde $v'{i,j} > 0$, sea $C^v{i,j} = {k \mid k \in {i+1,...,n} \wedge v_{k,j} = 1}$ el conjunto de celdas válidas hacia abajo:
-   ∑k∈Ci,jvgk,j=vi,j′\sum*{k \in C^v*{i,j}} g*{k,j} = v'*{i,j}∑k∈Ci,jv​​gk,j​=vi,j′​
-5. Restricciones de unicidad vertical
-   Para cada $i,j$ donde $v'_{i,j} > 0$:
-   ∀k,l∈Ci,jv,k≠l:gk,j≠gl,j\forall k,l \in C^v*{i,j}, k \neq l: g*{k,j} \neq g\_{l,j}∀k,l∈Ci,jv​,k=l:gk,j​=gl,j​
+\[ \forall i, j \in \{1, \dots, n\}, \quad \text{validCell}{i,j} = 0 \Rightarrow \text{grid}{i,j} = 0 \]
+\[ \forall i, j \in \{1, \dots, n\}, \quad \text{validCell}{i,j} = 1 \Rightarrow 1 \leq \text{grid}{i,j} \leq 9 \]
+
+### 2. Restricciones sobre sumas horizontales
+
+Si \( \text{hsum}\_{i,j} > 0 \), definimos el conjunto de celdas en la misma fila y a la derecha de \( (i,j) \) que son válidas:
+
+\[ \text{cells} = \{ k \mid k > j, \text{validCell}\_{i,k} = 1 \} \]
+
+Si \( \text{cells} \neq \emptyset \), entonces:
+
+\[ \sum*{k \in \text{cells}} \text{grid}{i,k} = \text{hsum}{i,j} \]
+\[ \text{all\different}(\{\text{grid}{i,k} \mid k \in \text{cells}, \text{grid}*{i,k} > 0\}) \]
+
+### 3. Restricciones sobre sumas verticales
+
+Si \( \text{vsum}\_{i,j} > 0 \), definimos el conjunto de celdas en la misma columna y debajo de \( (i,j) \) que son válidas:
+
+\[ \text{cells} = \{ k \mid k > i, \text{validCell}\_{k,j} = 1 \} \]
+
+Si \( \text{cells} \neq \emptyset \), entonces:
+
+\[ \sum*{k \in \text{cells}} \text{grid}{k,j} = \text{vsum}{i,j} \]
+\[ \text{all\different}(\{\text{grid}{k,j} \mid k \in \text{cells}, \text{grid}*{k,j} > 0\}) \]
+
+## Estrategia de Resolución
+
+Usamos la estrategia First-Fail en la búsqueda de soluciones:
+
+\[ \text{solve} :: \text{int\search}([\text{grid}{i,j}], \text{first_fail}, \text{indomain_min}, \text{complete}) \text{ satisfy} \]
 
 📌 **Conclusión:**  
 Los resultados obtenidos en estas pruebas adicionales confirman que la estrategia **`first_fail`** es eficiente en la mayoría de los casos, manteniendo tiempos de ejecución bajos y estabilidad en la resolución del Kakuro. Sin embargo, algunos casos requieren ajustes específicos en el modelo CSP para mejorar la optimización.
