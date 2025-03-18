@@ -157,6 +157,49 @@ Esto ayuda a evitar soluciones repetitivas y mejorar la exploración del espacio
 
 ---
 
+### **5.3 Notacion Matematica Sudoku**
+
+# Notación Matemática del Problema de Sudoku
+
+Sea \( S \) el tamaño del lado de un subcuadrante, y \( N = S^2 \) el tamaño de la cuadrícula del Sudoku.
+
+## Variables
+
+- \( \text{PuzzleRange} = \{1, \dots, N\} \) es el conjunto de valores permitidos en la cuadrícula.
+- \( \text{SubSquareRange} = \{1, \dots, S\} \) es el conjunto de índices para los subcuadrantes.
+- \( \text{start} : \mathbb{N}^{N \times N} \) es la matriz de entrada donde un 0 representa una casilla vacía.
+- \( \text{puzzle} : \text{var } \, \text{PuzzleRange}^{N \times N} \) es la cuadrícula de variables a resolver.
+
+## Restricciones
+
+### 1. Prellenado de la cuadrícula
+
+Si \( \text{start}[i, j] > 0 \), entonces la casilla ya está determinada:
+\[
+\forall i, j \in \text{PuzzleRange}, \quad \text{start}[i, j] > 0 \Rightarrow \text{puzzle}[i, j] = \text{start}[i, j]
+\]
+
+### 2. Restricción de Filas
+
+Cada fila debe contener números distintos:
+\[
+\forall i \in \text{PuzzleRange}, \quad \text{alldifferent}([\text{puzzle}[i, j] \mid j \in \text{PuzzleRange}])
+\]
+
+### 3. Restricción de Columnas
+
+Cada columna debe contener números distintos:
+\[
+\forall j \in \text{PuzzleRange}, \quad \text{alldifferent}([\text{puzzle}[i, j] \mid i \in \text{PuzzleRange}])
+\]
+
+### 4. Restricción de Subcuadrículas
+
+Cada subcuadrante de tamaño \( S \times S \) debe contener números distintos:
+\[
+\forall a, o \in \text{SubSquareRange}, \quad \text{alldifferent}([\text{puzzle}[(a-1)S + a_1, (o-1)S + o_1] \mid a_1, o_1 \in \text{SubSquareRange}])
+\]
+
 ---
 
 ## 6️⃣ **Conclusiones**
