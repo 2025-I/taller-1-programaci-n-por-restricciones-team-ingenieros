@@ -30,6 +30,13 @@ constraint forall(a, o in SubSquareRange)(
   alldifferent([puzzle[(a-1) * S + a1, (o-1) * S + o1] | a1, o1 in SubSquareRange])
 );
 
+
+% Estrategia 1: Búsqueda con `first_fail` (Primero el menor)
+solve :: int_search([puzzle[i, j] | i, j in PuzzleRange], first_fail, indomain_min) satisfy;
+
+% Estrategia 2: Búsqueda con `maximize` (Elegir valores más grandes primero)
+% solve :: maximize(sum(i, j in PuzzleRange)(puzzle[i, j]));
+
 % Estrategia 3: Búsqueda `most_constrained` con valores aleatorios
 solve :: int_search([puzzle[i, j] | i, j in PuzzleRange], most_constrained, indomain_random) satisfy;
 

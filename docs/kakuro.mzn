@@ -60,8 +60,31 @@ constraint forall(i in 1..n, j in 1..n) (
   endif
 );
 
-% Resolver usando la estrategia First-Fail
+
+% Estrategia 1: Resolver usando Búsqueda en Profundidad (DFS)
+solve :: int_search([grid[i,j] | i in 1..n, j in 1..n], input_order, indomain_min, complete) satisfy;
+
+% Estrategia 2: Resolver usando la estrategia First-Fail
 solve :: int_search([grid[i,j] | i in 1..n, j in 1..n], first_fail, indomain_min, complete) satisfy;
+
+
+% Estrategia 3:búsqueda personalizada branch and bound con selección inteligente de variables
+solve :: int_search(
+  [grid[i,j] | i in 1..n, j in 1..n where validCell[i,j] == 1], % Buscar solo en celdas válidas
+  dom_w_deg,     % Selección de variable: grado ponderado (considera la actividad de las restricciones)
+  indomain_min,  % Selección de valor: probar primero los valores más pequeños
+  complete       % Búsqueda completa
+) minimize total_sum;  % Branch and bound - minimiza la suma
+
+% Restricción redundante adicional para fortalecer la propagación
+constraint forall(i in 1..n) (
+  sum(j in 1..n)(grid[i,j]) <= 45  % La suma en cualquier fila no puede exceder 45
+);
+constraint forall(j in 1..n) (
+  sum(i in 1..n)(grid[i,j]) <= 45  % La suma en cualquier columna no puede exceder 45
+);
+
+
 
 % Salida: Solo números
 output [
